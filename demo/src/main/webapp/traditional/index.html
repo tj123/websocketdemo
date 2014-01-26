@@ -30,7 +30,7 @@
               <th class="number">价格</th>
               <th class="number">变化</th>
               <th>%</th>
-              <th>持仓均价</th>
+              <th class="number">持仓均价</th>
               <th class="number">持有量</th>
               <th class="number">市值</th>
               <th class="number">盈亏</th>
@@ -113,7 +113,7 @@
     <script src="portfolio.js"></script>
     <script type="text/javascript">
       (function() {
-        var socket = new SockJS('/spring-websocket-portfolioportfolio');
+        var socket = new SockJS('/spring-websocket-portfolio/portfolio');
         var stompClient = Stomp.over(socket);
 
         var appModel = new ApplicationModel(stompClient);

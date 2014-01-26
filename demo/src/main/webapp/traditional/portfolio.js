@@ -99,14 +99,15 @@ function PortfolioRow(data) {
   self.value = ko.computed(function() { return (self.price() * self.shares()); });
   self.formattedValue = ko.computed(function() { return "$" + self.value().toFixed(2); });
   self.capital = data.capital;
-  self.average = ko.computed(function() { return (self.capital / self.shares); });
-  self.profit = ko.computed(function() { return (self.shares * self.price - self.capital); });
+  self.average = ko.observable((self.capital / self.shares()).toFixed(2));
+  self.profit = ko.observable(self.shares() * self.price() - self.capital);
 
   self.updatePrice = function(newPrice) {
     var delta = (newPrice - self.price()).toFixed(2);
     self.arrow((delta < 0) ? '<i class="icon-arrow-down"></i>' : '<i class="icon-arrow-up"></i>');
     self.change((delta / self.price() * 100).toFixed(2));
     self.price(newPrice);
+    self.average((self.capital / self.shares()).toFixed(2));
     self.profit((self.shares() * self.price() - self.capital).toFixed(2));
   };
 };
