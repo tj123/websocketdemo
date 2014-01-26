@@ -44,10 +44,10 @@
               <td data-bind="text: formattedPrice" class="number"></td>
               <td data-bind="text: change, style: {color: change() < 0 ? 'green' : 'red'}" class="number"></td>
               <td data-bind="html: arrow" class="icon"></td>
-              <td data-bind="text: average" class="number"></td>
+              <td data-bind="text: formattedAverage" class="number"></td>
               <td data-bind="text: shares" class="number"></td>
               <td data-bind="text: formattedValue" class="number"></td>
-              <td data-bind="text: profit, style: {color: profit() < 0 ? 'green' : 'red'}" class="number"></td>
+              <td data-bind="text: formattedProfit, style: {color: profit() < 0 ? 'green' : 'red'}" class="number"></td>
               <td class="trade-buttons">
                 <button class="btn btn-primary" data-bind="click: $root.trade().showBuy">Buy</button>
                 <button class="btn btn-primary" data-bind="click: $root.trade().showSell">Sell</button>
@@ -56,9 +56,10 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="5">Total</td>
+              <td colspan="6">Total</td>
               <td data-bind="text: portfolio().totalShares" class="number"></td>
               <td data-bind="text: portfolio().totalValue" class="number"></td>
+              <td data-bind="text: portfolio().totalProfit" class="number"></td>
               <td></td>
             </tr>
           </tfoot>

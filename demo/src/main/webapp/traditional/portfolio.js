@@ -64,6 +64,14 @@ function PortfolioModel() {
     }
     return "$" + result.toFixed(2);
   });
+  
+  self.totalProfit = ko.computed(function() {
+	var result = 0;
+	for ( var i = 0; i < self.rows().length; i++) {
+	  result += self.rows()[i].profit().toFixed(2);
+	}
+	return "$" + result;
+  });
 
   var rowLookup = {};
 
@@ -103,7 +111,9 @@ function PortfolioRow(data) {
   self.formattedValue = ko.computed(function() { return "$" + self.value().toFixed(2); });
   self.capital = ko.observable(data.capital);
   self.average = ko.observable(self.shares() == 0 ? 0 :(self.capital() / self.shares()).toFixed(2));
+  self.formattedAverage = ko.computed(function() { return "$" + self.average()});
   self.profit = ko.observable(self.shares() * self.price() - self.capital());
+  self.formattedProfit = ko.computed(function() { return "$" + self.profit()});
 
   self.updatePrice = function(newPrice) {
     var delta = (newPrice - self.price()).toFixed(2);

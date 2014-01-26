@@ -69,14 +69,15 @@ public class StockQuoteGenerator {
 	 */
 	private static BigDecimal getNewPrice(String ticker) {
 		BigDecimal seedPrice = getPrice(ticker);
-		double range = seedPrice.multiply(new BigDecimal(0.10)).doubleValue();
-		BigDecimal priceChange = new BigDecimal(String.valueOf(random.nextDouble() * random.nextDouble() * random.nextDouble() * range));
+		double rangeLimit = seedPrice.doubleValue() * 0.10;
+		double range = (random.nextDouble() - random.nextDouble()) * random.nextDouble();
+		BigDecimal priceChange = new BigDecimal(String.valueOf(range * rangeLimit));
 		if (random.nextDouble() > 0.8) {
 			return seedPrice;
 		}
-		seedPrice = seedPrice.add(priceChange).setScale(2, BigDecimal.ROUND_DOWN);
-		prices.put(ticker, seedPrice.toPlainString());
-		return seedPrice;
+		BigDecimal newSeedPrice = seedPrice.add(priceChange).setScale(2, BigDecimal.ROUND_DOWN);
+		prices.put(ticker, newSeedPrice.toString());
+		return newSeedPrice;
 	}
 
 	public static BigDecimal getPrice(String ticker) {
@@ -84,7 +85,7 @@ public class StockQuoteGenerator {
 			initPrices();
 		}
 		String string = prices.get(ticker);
-		BigDecimal seedPrice = new BigDecimal(string, mathContext);
+		BigDecimal seedPrice = new BigDecimal(string).setScale(2, BigDecimal.ROUND_DOWN);
 		return seedPrice;
 	}
 
