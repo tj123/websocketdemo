@@ -15,15 +15,31 @@
  */
 package org.springframework.samples.portfolio.vo;
 
-
+/**
+ * 交易
+ * @author pengfei
+ *
+ */
 public class Trade {
-
+	
+	/**
+	 * 标签
+	 */
 	private String ticker;
 
+	/**
+	 * 数量
+	 */
 	private int shares;
 
+	/**
+	 * 行为 (买/卖)
+	 */
 	private TradeAction action;
 
+	/**
+	 * 用户
+	 */
 	private String username;
 
 

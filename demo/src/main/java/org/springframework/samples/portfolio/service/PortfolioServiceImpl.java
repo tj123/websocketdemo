@@ -38,31 +38,31 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public PortfolioServiceImpl() {
 
 		Portfolio portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 10, 100));
+		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 10));
+		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 10));
+		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 10));
+		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 100));
 		this.portfolioLookup.put("sybn", portfolio);
 
 		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 10, 10));
-		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 10, 100));
+		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 10));
+		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 10));
+		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 10));
+		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 100));
 		this.portfolioLookup.put("admin", portfolio);
 
 		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 24.30, 75));
-		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 13.44, 50));
-		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 34.15, 33));
-		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 31.22, 45));
+		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 75));
+		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 50));
+		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 33));
+		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 45));
 		this.portfolioLookup.put("fabrice", portfolio);
 
 		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 24.30, 75));
-		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 905.09, 5));
-		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 65.58, 23));
-		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 48.30, 15));
+		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 75));
+		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 5));
+		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 23));
+		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 15));
 		this.portfolioLookup.put("paulson", portfolio);
 	}
 
@@ -70,7 +70,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 	 * 获取某人的资产
 	 */
 	public Portfolio findPortfolio(String username) {
-		Portfolio portfolio = this.portfolioLookup.get(username);
+		Portfolio portfolio = portfolioLookup.get(username);
 		if (portfolio == null) {
 			throw new IllegalArgumentException(username);
 		}

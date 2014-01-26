@@ -41,7 +41,7 @@ public class TradeServiceImpl implements TradeService {
 
 	private final SimpMessageSendingOperations messagingTemplate;
 
-	private final PortfolioService portfolioService;
+	public final PortfolioService portfolioService;
 
 	private final List<TradeResult> tradeResults = new CopyOnWriteArrayList<>();
 

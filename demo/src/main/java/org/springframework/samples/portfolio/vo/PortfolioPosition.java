@@ -58,15 +58,14 @@ public class PortfolioPosition {
 	 * 创建一个资产
 	 * @param company
 	 * @param ticker
-	 * @param price
 	 * @param shares
 	 */
-	public PortfolioPosition(String company, String ticker, double price, int shares) {
+	public PortfolioPosition(String company, String ticker, int shares) {
 		this.company = company;
 		this.ticker = ticker;
-		this.price = price;
+		this.price = StockQuoteGenerator.getPrice(ticker).doubleValue();
 		this.shares = shares;
-		this.capital = price * shares;
+		this.capital = this.price * shares;
 		this.updateTime = System.currentTimeMillis();
 	}
 
@@ -80,7 +79,8 @@ public class PortfolioPosition {
 		this.ticker = other.ticker;
 		this.price = StockQuoteGenerator.getPrice(other.ticker).doubleValue();
 		this.shares = other.shares + sharesToAddOrSubtract;
-		this.capital = other.capital + other.price * sharesToAddOrSubtract;
+		double price = StockQuoteGenerator.getPrice(other.ticker).doubleValue();
+		this.capital = other.capital + price * sharesToAddOrSubtract;
 		this.updateTime = System.currentTimeMillis();
 	}
 

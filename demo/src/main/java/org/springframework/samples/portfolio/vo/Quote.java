@@ -17,11 +17,21 @@ package org.springframework.samples.portfolio.vo;
 
 import java.math.BigDecimal;
 
-
+/**
+ * 报价
+ * @author pengfei
+ *
+ */
 public class Quote {
 
+	/**
+	 * 标签
+	 */
 	private final String ticker;
 
+	/**
+	 * 价格
+	 */
 	private final BigDecimal price;
 
 
@@ -40,6 +50,6 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "Quote [ticker=" + this.ticker + ", this.price=" + price + "]";
+		return "Quote [股票代码:" + this.ticker + ", 价格:" + price + "]";
 	}
 }

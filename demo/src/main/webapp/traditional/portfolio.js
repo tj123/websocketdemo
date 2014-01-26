@@ -82,7 +82,10 @@ function PortfolioModel() {
   };
 
   self.updatePosition = function(position) {
-    rowLookup[position.ticker].shares(position.shares);
+	var pos = rowLookup[position.ticker];
+	pos.shares(position.shares);
+	pos.capital(position.capital);
+	pos.average(pos.shares() == 0 ? 0 :(pos.capital() / pos.shares()).toFixed(2));
   };
 };
 
@@ -98,17 +101,16 @@ function PortfolioRow(data) {
   self.shares = ko.observable(data.shares);
   self.value = ko.computed(function() { return (self.price() * self.shares()); });
   self.formattedValue = ko.computed(function() { return "$" + self.value().toFixed(2); });
-  self.capital = data.capital;
-  self.average = ko.observable((self.capital / self.shares()).toFixed(2));
-  self.profit = ko.observable(self.shares() * self.price() - self.capital);
+  self.capital = ko.observable(data.capital);
+  self.average = ko.observable(self.shares() == 0 ? 0 :(self.capital() / self.shares()).toFixed(2));
+  self.profit = ko.observable(self.shares() * self.price() - self.capital());
 
   self.updatePrice = function(newPrice) {
     var delta = (newPrice - self.price()).toFixed(2);
     self.arrow((delta < 0) ? '<i class="icon-arrow-down"></i>' : '<i class="icon-arrow-up"></i>');
     self.change((delta / self.price() * 100).toFixed(2));
     self.price(newPrice);
-    self.average((self.capital / self.shares()).toFixed(2));
-    self.profit((self.shares() * self.price() - self.capital).toFixed(2));
+    self.profit((self.shares() * self.price() - self.capital()).toFixed(2));
   };
 };
 
@@ -141,11 +143,11 @@ function TradeModel(stompClient) {
   
   var validateShares = function() {
       if (isNaN(self.sharesToTrade()) || (self.sharesToTrade() < 1)) {
-        self.error('Invalid number');
+        self.error('无效的份额');
         return false;
       }
       if ((self.action() === 'Sell') && (self.sharesToTrade() > self.currentRow().shares())) {
-        self.error('Not enough shares');
+        self.error('没有足够的股票');
         return false;
       }
       return true;
