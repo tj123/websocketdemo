@@ -68,9 +68,9 @@ function PortfolioModel() {
   self.totalProfit = ko.computed(function() {
 	var result = 0;
 	for ( var i = 0; i < self.rows().length; i++) {
-	  result += self.rows()[i].profit().toFixed(2);
+	  result += self.rows()[i].profit() * 1;
 	}
-	return "$" + result;
+	return "$" + result.toFixed(2);
   });
 
   var rowLookup = {};
