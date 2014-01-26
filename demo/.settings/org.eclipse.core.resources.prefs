@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/main/java/org/springframework/samples/portfolio/config/WebSecurityConfig.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/service/PortfolioService.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/service/PortfolioServiceImpl.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/service/QuoteService.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/service/TradeService.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/service/TradeServiceImpl.java=UTF-8
+encoding//src/main/java/org/springframework/samples/portfolio/web/PortfolioController.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/test/resources=UTF-8
+encoding/<project>=UTF-8
