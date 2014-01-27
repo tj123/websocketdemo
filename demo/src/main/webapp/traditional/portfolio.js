@@ -20,8 +20,13 @@ function ApplicationModel(stompClient) {
         self.portfolio().processQuote(JSON.parse(message.body));
       });
       stompClient.subscribe("/user/queue/position-updates", function(message) {
-        self.pushNotification("Position update " + message.body);
-        self.portfolio().updatePosition(JSON.parse(message.body));
+    	//portfolio = {"company":"Dell Inc.","ticker":"DELL","shares":10,"capital":94.3,"updateTime":1390801786844,"price":9.25}
+        var portfolio = JSON.parse(message.body);
+    	self.pushNotification(
+    			"交易成功: 您现在持有'" + portfolio.company + "'的股票 " + portfolio.shares + " 份." +
+    			"持仓均价: $" + (portfolio.capital/portfolio.shares).toFixed(2) + "."
+    		);
+        self.portfolio().updatePosition(portfolio);
       });
       stompClient.subscribe("/user/queue/funds-updates", function(message) {
           self.portfolio().updateFunds(JSON.parse(message.body));
@@ -52,6 +57,9 @@ function PortfolioModel() {
 
   self.rows = ko.observableArray();
   self.funds = ko.observable(0);
+  self.fundsValue = ko.computed(function() {
+	    return "$" + self.funds().toFixed(2);
+	  });
 
   self.totalShares = ko.computed(function() {
     var result = 0;
@@ -66,11 +74,23 @@ function PortfolioModel() {
     for ( var i = 0; i < self.rows().length; i++) {
       result += self.rows()[i].value();
     }
-    return "$" + result.toFixed(2);
+    return result;
   });
   
-  self.fundsValue = ko.computed(function() {
-    return "$" + self.funds();
+  self.formattedTotalValue = ko.computed(function() {
+	var result = 0;  
+    for ( var i = 0; i < self.rows().length; i++) {
+	  result += self.rows()[i].value();
+	}
+	return "$" + result.toFixed(2);
+  });
+  
+  self.assets = ko.computed(function() {
+	return self.totalValue() + self.funds();
+  });
+  
+  self.formattedAssets = ko.computed(function() {
+	return "$" + self.assets().toFixed(2);
   });
   
   self.totalProfit = ko.computed(function() {
@@ -78,9 +98,12 @@ function PortfolioModel() {
 	for ( var i = 0; i < self.rows().length; i++) {
 	  result += self.rows()[i].profit() * 1;
 	}
-	return "$" + result.toFixed(2);
+	return result;
   });
-
+  self.formattedTotalProfit = ko.computed(function() {
+	return "$" + self.totalProfit().toFixed(2);
+  });
+  
   var rowLookup = {};
 
   self.loadPositions = function(position) {
@@ -103,7 +126,7 @@ function PortfolioModel() {
 	var pos = rowLookup[position.ticker];
 	pos.shares(position.shares);
 	pos.capital(position.capital);
-	pos.average(pos.shares() == 0 ? 0 :(pos.capital() / pos.shares()).toFixed(2));
+	pos.average(pos.shares() == 0 ? 0 : (pos.capital() / pos.shares()).toFixed(2));
   };
   
   self.updateFunds = function(funds) {
@@ -126,7 +149,7 @@ function PortfolioRow(data) {
   self.capital = ko.observable(data.capital);
   self.average = ko.observable(self.shares() == 0 ? 0 :(self.capital() / self.shares()).toFixed(2));
   self.formattedAverage = ko.computed(function() { return "$" + self.average()});
-  self.profit = ko.observable(self.shares() * self.price() - self.capital());
+  self.profit = ko.observable((self.shares() * self.price() - self.capital()).toFixed(2));
   self.formattedProfit = ko.computed(function() { return "$" + self.profit()});
 
   self.updatePrice = function(newPrice) {
@@ -142,6 +165,7 @@ function TradeModel(stompClient) {
   var self = this;
 
   self.action = ko.observable();
+  self.actionName = ko.observable();
   self.sharesToTrade = ko.observable(0);
   self.currentRow = ko.observable({});
   self.error = ko.observable('');
@@ -149,14 +173,26 @@ function TradeModel(stompClient) {
 
   self.showBuy  = function(row) { self.showModal('Buy', row) }
   self.showSell = function(row) { self.showModal('Sell', row) }
+  self.shortcutBuy  = function(row) { self.shortcutModal('Buy', row) }
+  self.shortcutSell = function(row) { self.shortcutModal('Sell', row) }
 
   self.showModal = function(action, row) {
     self.action(action);
+    self.actionName(action == "Buy" ? "买入" : "卖出");
     self.sharesToTrade(0);
     self.currentRow(row);
     self.error('');
     self.suppressValidation(false);
     $('#trade-dialog').modal();
+  }
+  self.shortcutModal = function(action, row) {
+	    self.action(action);
+	    self.actionName(action == "Buy" ? "买入" : "卖出");
+	    self.sharesToTrade(10);
+	    self.currentRow(row);
+	    self.error('');
+	    self.suppressValidation(false);
+	    self.executeTrade();
   }
 
   $('#trade-dialog').on('shown', function () {

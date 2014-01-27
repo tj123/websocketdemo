@@ -42,22 +42,24 @@ public class PortfolioServiceImpl implements PortfolioService {
 	public PortfolioServiceImpl() {
 
 		Portfolio portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 0));
-		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 0));
-		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 0));
-		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 100));
+		portfolio.addPosition(new PortfolioPosition("思杰系统公司", "CTXS", 0));
+		portfolio.addPosition(new PortfolioPosition("戴尔公司", "DELL", 0));
+		portfolio.addPosition(new PortfolioPosition("微软公司", "MSFT", 0));
+		portfolio.addPosition(new PortfolioPosition("甲骨文公司", "ORCL", 100));
 		portfolio.setfunds(9000D);
+		portfolio.setUserName("sybn");
 		this.portfolioLookup.put("sybn", portfolio);
 		this.fundsLookup.put("sybn", 9000D);
 
 		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 10));
-		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 10));
-		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 10));
-		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 100));
+		portfolio.addPosition(new PortfolioPosition("EMC公司", "EMC", 10));
+		portfolio.addPosition(new PortfolioPosition("谷歌公司", "GOOG", 10));
+		portfolio.addPosition(new PortfolioPosition("VMware公司", "VMW", 10));
+		portfolio.addPosition(new PortfolioPosition("红帽公司", "RHT", 100));
 		portfolio.setfunds(9000D);
+		portfolio.setUserName("admin");
 		this.portfolioLookup.put("admin", portfolio);
-		this.fundsLookup.put("sybn", 9000D);
+		this.fundsLookup.put("admin", 9000D);
 	}
 
 	/**
@@ -69,6 +71,12 @@ public class PortfolioServiceImpl implements PortfolioService {
 			throw new IllegalArgumentException(username);
 		}
 		return portfolio;
+	}
+	/**
+	 * 修改某人的资产
+	 */
+	public void setPortfolio(String username, Portfolio portfolio) {
+		this.portfolioLookup.put(username, portfolio);
 	}
 	
 	/**

@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.portfolio.service.PortfolioService;
-import org.springframework.samples.portfolio.service.StockQuoteGenerator;
 import org.springframework.samples.portfolio.vo.PortfolioPosition;
 
 
@@ -32,12 +31,12 @@ import org.springframework.samples.portfolio.vo.PortfolioPosition;
  *
  */
 public class Portfolio {
-	@Autowired PortfolioService portfolioService;
 	/**
 	 * 资产组合
 	 */
 	private final Map<String,PortfolioPosition> positionLookup = new LinkedHashMap<String,PortfolioPosition>();
 	private Double funds = 0D;
+	private String userName;
 
 	/**
 	 * 获取资产
@@ -73,11 +72,14 @@ public class Portfolio {
 		if ((position == null) || (sharesToBuy < 1)) {
 			return null;
 		}
-		double price = StockQuoteGenerator.getPrice(ticker).doubleValue();
-		position = new PortfolioPosition(position, price, sharesToBuy);
-		this.positionLookup.put(ticker, position);
-		incfunds(- price * sharesToBuy);
-		return position;
+		double balance = - position.getPrice() * sharesToBuy;
+		boolean deductionResults = incfunds(balance);
+		if (deductionResults) {
+			position = new PortfolioPosition(position, sharesToBuy);
+			this.positionLookup.put(ticker, position);
+			return position;
+		}
+		return null;
 	}
 
 	/**
@@ -89,10 +91,9 @@ public class Portfolio {
 		if ((position == null) || (sharesToSell < 1) || (position.getShares() < sharesToSell)) {
 			return null;
 		}
-		double price = StockQuoteGenerator.getPrice(ticker).doubleValue();
-		position = new PortfolioPosition(position, price, -sharesToSell);
+		incfunds(position.getPrice() * sharesToSell);
+		position = new PortfolioPosition(position, -sharesToSell);
 		this.positionLookup.put(ticker, position);
-		incfunds(price * sharesToSell);
 		return position;
 	}
 
@@ -100,7 +101,7 @@ public class Portfolio {
 	 * 获取账户余额
 	 */
 	public Double getfunds() {
-		return funds;
+		return this.funds;
 	}
 	/**
 	 * 设置账户余额
@@ -111,8 +112,23 @@ public class Portfolio {
 	/**
 	 * 设置账户余额
 	 */
-	public void incfunds(Double margin) {
-		this.funds = funds + margin;
+	public boolean incfunds(Double balance) {
+		this.funds = PortfolioHelper.getfunds(userName);
+		if (funds + balance >=0 ) {
+			this.funds = getfunds() + balance;
+			PortfolioHelper.setfunds(userName, funds);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

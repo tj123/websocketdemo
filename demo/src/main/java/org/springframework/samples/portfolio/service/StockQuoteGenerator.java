@@ -1,7 +1,6 @@
 package org.springframework.samples.portfolio.service;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
@@ -67,7 +66,8 @@ public class StockQuoteGenerator {
 		double rangeLimit = seedPrice.doubleValue() * 0.10;
 		double range = (random.nextDouble() - random.nextDouble()) * random.nextDouble();
 		BigDecimal priceChange = new BigDecimal(String.valueOf(range * rangeLimit));
-		if (random.nextDouble() > 0.8) {
+		// 补偿因1.1*0.9=0.99 造成的股价下跌趋势，将下跌行为的0.9修正为0.909，故重置9%的跌幅为0
+		if (range <0 && random.nextDouble() > 0.91) {
 			return seedPrice;
 		}
 		BigDecimal newSeedPrice = seedPrice.add(priceChange).setScale(2, BigDecimal.ROUND_DOWN);

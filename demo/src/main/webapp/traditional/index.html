@@ -9,6 +9,7 @@
     <!--[if lt IE 9]>
     <script src="../assets/lib/html5shiv/dist/html5shiv.js"></script>
     <![endif]-->
+    <style>.btn{padding: 1px 6px;}</style>
   </head>
   <body>
 
@@ -16,10 +17,9 @@
       <div id="heading" class="masthead">
         <div class="pull-right">
           <span class="text-info" data-bind="text: username"><em></em></span>&nbsp;
-          <a href="../cujojs" class="btn"><i class="icon-random"></i> Switch to cujoJS</a>&nbsp;
           <button data-bind="click: logout" class="btn"><i class="icon-off"></i></button>
         </div>
-        <h3 class="muted">Stock Trading Portfolio</h3>
+        <h3 class="muted">股票操作台</h3>
       </div>
       <div id="main-content">
         <table class="table table-striped">
@@ -27,14 +27,14 @@
             <tr>
               <th>企业</th>
               <th>股票代码</th>
-              <th class="number">价格</th>
-              <th class="number">变化</th>
-              <th>%</th>
-              <th class="number">持仓均价</th>
-              <th class="number">持有量</th>
+              <th class="number">当前价格</th>
+              <th class="number">近期涨幅(%)</th>
+              <th class="number">持股量</th>
               <th class="number">市值</th>
-              <th class="number">盈亏</th>
-              <th></th>
+              <th class="number">持仓均价</th>
+              <th>盈亏</th>
+              <th>操作</th>
+              <th>快捷操作</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: portfolio().rows">
@@ -42,31 +42,49 @@
               <td data-bind="text: company"></td>
               <td data-bind="text: ticker"></td>
               <td data-bind="text: formattedPrice" class="number"></td>
-              <td data-bind="text: change, style: {color: change() < 0 ? 'green' : 'red'}" class="number"></td>
-              <td data-bind="html: arrow" class="icon"></td>
-              <td data-bind="text: formattedAverage" class="number"></td>
+              <td class="number">
+                <span data-bind="text: change, style: {color: change() < 0 ? 'green' : 'red'}"></span>
+              	<span data-bind="html: arrow"></span>
+              </td>
               <td data-bind="text: shares" class="number"></td>
               <td data-bind="text: formattedValue" class="number"></td>
-              <td data-bind="text: formattedProfit, style: {color: profit() < 0 ? 'green' : 'red'}" class="number"></td>
+              <td data-bind="text: formattedAverage, style: {color: price() < average() ? 'green' : 'red'}" class="number"></td>
+              <td data-bind="text: formattedProfit, style: {color: profit() < 0 ? 'green' : 'red'}"></td>
               <td class="trade-buttons">
-                <button class="btn btn-primary" data-bind="click: $root.trade().showBuy">Buy</button>
-                <button class="btn btn-primary" data-bind="click: $root.trade().showSell">Sell</button>
+                <button class="btn btn-primary" data-bind="click: $root.trade().showBuy">买入</button>
+                <button class="btn btn-primary" data-bind="click: $root.trade().showSell">卖出</button>
+              </td>
+              <td class="trade-buttons">
+                <button class="btn btn-primary" data-bind="click: $root.trade().shortcutBuy">买10</button>
+                <button class="btn btn-primary" data-bind="click: $root.trade().shortcutSell">卖10</button>
               </td>
              </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="6">Total</td>
+              <td colspan="3">
+              	<span>现金余额： </span>
+              	<span data-bind="text: portfolio().fundsValue, style: {color: portfolio().funds() < 0 ? 'green' : 'red'}" class="number"></span>
+              </td>
+              <td class="number">持股总计: </td>
               <td data-bind="text: portfolio().totalShares" class="number"></td>
-              <td data-bind="text: portfolio().totalValue" class="number"></td>
-              <td data-bind="text: portfolio().totalProfit, style: {color: portfolio().funds() < 0 ? 'green' : 'red'}" class="number"></td>
-              <td data-bind="text: portfolio().fundsValue" class="number"></td>
+              <td data-bind="text: portfolio().formattedTotalValue" class="number"></td>
+              <td></td>
+              <td data-bind="style: {color: portfolio().totalProfit() < 0 ? 'green' : 'red'}">
+              	$<span data-bind="text: portfolio().totalProfit"></span>
+              </td>
+              <td>
+              	总资产:
+              	<span data-bind="style: {color: portfolio().assets() < 0 ? 'green' : 'red'}">
+              	  <span data-bind="text: portfolio().formattedAssets"></span>
+                </span>
+              </td>
             </tr>
           </tfoot>
           <tbody></tbody>
         </table>
         <div class="alert alert-warning">
-          <h5>Notifications</h5>
+          <h5>通告：</h5>
           <ul data-bind="foreach: notifications">
             <li data-bind="text: notification"></li>
           </ul>
@@ -77,24 +95,26 @@
           <form class="form-horizontal" data-bind="submit: trade().executeTrade">
             <fieldset>
               <legend>
-                <span data-bind="text: trade().action"></span>
-                <span data-bind="text: trade().currentRow().company"></span> Stock
+                <span data-bind="text: trade().actionName"></span>
+                <span data-bind="text: trade().currentRow().company"></span>的股票
               </legend>
             </fieldset>
             <div class="control-group" data-bind="css: {error: trade().error()}">
-              <label class="control-label" for="inputShares">Shares</label>
+              <label class="control-label" for="inputShares">交易份额</label>
               <div class="controls">
                 <input id="inputShares" type="text" data-bind="value: trade().sharesToTrade">
-                <span class="help-inline" data-bind="text: trade().error">Please enter</span>
+                <span class="help-inline" data-bind="text: trade().error">请输入份额</span>
               </div>
             </div>
             <div class="control-group">
               <div class="controls">
+              <!-- 
                 <label class="checkbox"><input type="checkbox" data-bind="checked: trade().suppressValidation">
                   Suppress client-side validation</label>
+                   -->
               </div>
             </div>
-            <button class="btn" data-dismiss="modal">Close</button>
+            <button class="btn" data-dismiss="modal">关闭</button>
             <button class="btn btn-primary" type="submit">
               <span data-bind="text: trade().action"></span>
             </button>
@@ -121,7 +141,7 @@
         ko.applyBindings(appModel);
 
         appModel.connect();
-        appModel.pushNotification("Trade results take a 2-3 second simulated delay. Notifications will appear.");
+        appModel.pushNotification("每三秒左右变动一次股价.");
       })();
     </script>
 

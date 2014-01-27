@@ -37,7 +37,7 @@ public class PortfolioPosition {
 	/**
 	 * 价格
 	 */
-	private final double price;
+//	private final double price;
 
 	/**
 	 * 持有份额
@@ -63,9 +63,8 @@ public class PortfolioPosition {
 	public PortfolioPosition(String company, String ticker, int shares) {
 		this.company = company;
 		this.ticker = ticker;
-		this.price = StockQuoteGenerator.getPrice(ticker).doubleValue();
 		this.shares = shares;
-		this.capital = this.price * shares;
+		this.capital = getPrice() * shares;
 		this.updateTime = System.currentTimeMillis();
 	}
 
@@ -74,12 +73,11 @@ public class PortfolioPosition {
 	 * @param other
 	 * @param sharesToAddOrSubtract
 	 */
-	public PortfolioPosition(PortfolioPosition other, double price, int sharesToAddOrSubtract) {
+	public PortfolioPosition(PortfolioPosition other, int sharesToAddOrSubtract) {
 		this.company = other.company;
 		this.ticker = other.ticker;
-		this.price = StockQuoteGenerator.getPrice(other.ticker).doubleValue();
 		this.shares = other.shares + sharesToAddOrSubtract;
-		this.capital = other.capital + price * sharesToAddOrSubtract;
+		this.capital = other.capital + getPrice() * sharesToAddOrSubtract;
 		this.updateTime = System.currentTimeMillis();
 	}
 
@@ -92,7 +90,7 @@ public class PortfolioPosition {
 	}
 
 	public double getPrice() {
-		return this.price;
+		return StockQuoteGenerator.getPrice(ticker).doubleValue();
 	}
 
 	public int getShares() {
@@ -110,7 +108,7 @@ public class PortfolioPosition {
 	@Override
 	public String toString() {
 		return "PortfolioPosition [company=" + this.company + ", ticker=" + this.ticker
-				+ ", price=" + this.price + ", shares=" + this.shares + "]";
+				+ ", price=" + getPrice() + ", shares=" + this.shares + "]";
 	}
 
 }

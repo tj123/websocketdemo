@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.083" errors="2" skipped="0" tests="2" name="org.springframework.samples.portfolio.web.tomcat.IntegrationPortfolioTests">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jre7\bin"/>
+    <property name="java.vm.version" value="24.0-b56"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Users\pengfei\git\webSocketDemo\demo"/>
+    <property name="java.runtime.version" value="1.7.0_40-b43"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jre7\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\pengfei\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 8"/>
+    <property name="classworlds.conf" value="D:\eclipse_work\sts3.4.2\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2394724922258632071.tmp"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jre7\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\pengfei\AppData\Roaming\Tencent\QPlus\4.4.2025.0\QPlusRes\features\frequentapptips\bin\;C:\Users\pengfei\AppData\Roaming\Tencent\QPlus\4.4.2025.0\QPlusRes\features\searchtool\bin\;C:\Users\pengfei\AppData\Roaming\Tencent\QPlus\4.4.2025.0\QPlusRes\features\mirrorscreen\bin\;C:\Users\pengfei\AppData\Roaming\Tencent\QPlus\4.4.2025.0\Bin\;D:\eclipse\ExtIDE;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\Microsoft.NET\Framework\v4.0.30319;D:\eclipse\ant\apache-ant-1.9.0\bin;D:\eclipse\sts3.3\springsource\spring-roo-1.2.4.RELEASE\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files\TortoiseSVN\bin;."/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.2"/>
+    <property name="user.home" value="C:\Users\pengfei"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="user.name" value="pengfei"/>
+    <property name="java.class.path" value="/D:/eclipse/STS3.4.2/springsource/sts-3.4.0.RELEASE/configuration/org.eclipse.osgi/bundles/556/1/.cp/jars/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jre7"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_40"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jre7\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jre7\lib\resources.jar;C:\Program Files\Java\jre7\lib\rt.jar;C:\Program Files\Java\jre7\lib\sunrsasign.jar;C:\Program Files\Java\jre7\lib\jsse.jar;C:\Program Files\Java\jre7\lib\jce.jar;C:\Program Files\Java\jre7\lib\charsets.jar;C:\Program Files\Java\jre7\lib\jfr.jar;C:\Program Files\Java\jre7\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Users\pengfei\git\webSocketDemo\demo\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="maven.bootclasspath" value="/D:/eclipse/STS3.4.2/springsource/sts-3.4.0.RELEASE/configuration/org.eclipse.osgi/bundles/556/1/.cp/jars/plexus-classworlds-2.4.jar"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase time="0.073" classname="org.springframework.samples.portfolio.web.tomcat.IntegrationPortfolioTests" name="getPositions">
+    <error message="java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket" type="java.lang.IllegalStateException">java.lang.IllegalStateException: java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at org.springframework.samples.portfolio.web.tomcat.TestStompClient.connect(TestStompClient.java:109)
+	at org.springframework.samples.portfolio.web.tomcat.IntegrationPortfolioTests.getPositions(IntegrationPortfolioTests.java:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:134)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:103)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+Caused by: java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at java.util.concurrent.FutureTask.report(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at org.springframework.samples.portfolio.web.tomcat.TestStompClient.connect(TestStompClient.java:106)
+	... 32 more
+Caused by: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at org.apache.tomcat.websocket.WsWebSocketContainer.parseStatus(WsWebSocketContainer.java:610)
+	at org.apache.tomcat.websocket.WsWebSocketContainer.processResponse(WsWebSocketContainer.java:594)
+	at org.apache.tomcat.websocket.WsWebSocketContainer.connectToServer(WsWebSocketContainer.java:332)
+	at org.springframework.web.socket.client.standard.StandardWebSocketClient$1.call(StandardWebSocketClient.java:122)
+	at org.springframework.web.socket.client.standard.StandardWebSocketClient$1.call(StandardWebSocketClient.java:119)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</error>
+    <system-out>10:22:59 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization started
+10:22:59 [localhost-startStop-1] AnnotationConfigWebApplicationContext - Refreshing Root WebApplicationContext: startup date [Mon Jan 27 10:22:59 CST 2014]; root of context hierarchy
+10:22:59 [localhost-startStop-1] AnnotationConfigWebApplicationContext - Registering annotated classes: [class org.springframework.samples.portfolio.config.WebSecurityConfig]
+10:22:59 [localhost-startStop-1] DefaultSecurityFilterChain - Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@22a37c0, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e1073d0, org.springframework.security.web.header.HeaderWriterFilter@784d2e57, org.springframework.security.web.authentication.logout.LogoutFilter@15e426ac, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@151d22f4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@482f32d8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@300283d9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@21b21f5c, org.springframework.security.web.session.SessionManagementFilter@6fa63f4c, org.springframework.security.web.access.ExceptionTranslationFilter@29e2147d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2f6b867]
+10:22:59 [localhost-startStop-1] ContextLoader - Root WebApplicationContext: initialization completed in 488 ms
+10:22:59 [localhost-startStop-1] DispatcherServlet - FrameworkServlet &apos;dispatcher&apos;: initialization started
+10:22:59 [localhost-startStop-1] AnnotationConfigWebApplicationContext - Refreshing WebApplicationContext for namespace &apos;dispatcher-servlet&apos;: startup date [Mon Jan 27 10:22:59 CST 2014]; parent: Root WebApplicationContext
+10:22:59 [localhost-startStop-1] AnnotationConfigWebApplicationContext - Registering annotated classes: [class org.springframework.samples.portfolio.config.WebConfig,class org.springframework.samples.portfolio.config.WebSocketConfig]
+10:23:00 [localhost-startStop-1] SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+class org.apache.tomcat.websocket.server.WsHttpUpgradeHandler
+10:23:00 [localhost-startStop-1] SimpleUrlHandlerMapping - Mapped URL path [/portfolio/**] onto handler of type [class org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler]
+10:23:00 [localhost-startStop-1] SimpAnnotationMethodMessageHandler - Mapped &quot;{[/positions],messageType=[SUBSCRIBE]}&quot; onto public java.util.List&lt;org.springframework.samples.portfolio.vo.PortfolioPosition&gt; org.springframework.samples.portfolio.web.PortfolioController.getPositions(java.security.Principal) throws java.lang.Exception
+10:23:00 [localhost-startStop-1] SimpAnnotationMethodMessageHandler - Mapped &quot;{[/trade],messageType=[MESSAGE]}&quot; onto public void org.springframework.samples.portfolio.web.PortfolioController.executeTrade(org.springframework.samples.portfolio.vo.Trade,java.security.Principal)
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [clientOutboundChannel] subscribed org.springframework.web.socket.messaging.SubProtocolWebSocketHandler@4bcede44
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [clientInboundChannel] subscribed org.springframework.messaging.simp.user.UserDestinationMessageHandler@17fb52
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [brokerChannel] subscribed org.springframework.messaging.simp.user.UserDestinationMessageHandler@17fb52
+10:23:00 [localhost-startStop-1] SimpleBrokerMessageHandler - Starting SimpleBrokerMessageHandler
+10:23:00 [localhost-startStop-1] SimpleBrokerMessageHandler - Publishing BrokerAvailabilityEvent (available)
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [clientInboundChannel] subscribed org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler@3c1353bf
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [brokerChannel] subscribed org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler@3c1353bf
+10:23:00 [localhost-startStop-1] ExecutorSubscribableChannel - [clientInboundChannel] subscribed org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler@18df3f69
+10:23:00 [localhost-startStop-1] DispatcherServlet - FrameworkServlet &apos;dispatcher&apos;: initialization completed in 670 ms
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=a63d62ab-38b1-b10e-a053-09b71fc9134b
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id a63d62ab-38b1-b10e-a053-09b71fc9134b
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=90ccf3c7-b7ff-b133-192d-f3b4d00aecd8
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.ORCL, not a &quot;user&quot; destination
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 90ccf3c7-b7ff-b133-192d-f3b4d00aecd8
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=1745435f-587b-d28b-8552-d113e4f9e56f
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 1745435f-587b-d28b-8552-d113e4f9e56f
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=1a79131a-475d-f370-139a-4af252d2d034
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.ORCL
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 1a79131a-475d-f370-139a-4af252d2d034
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.CTXS, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.CTXS
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.MSFT, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.MSFT
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.VMW, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.VMW
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=5e4a2043-c67a-7756-7346-4cde459ca674
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.RHT, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.RHT
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 5e4a2043-c67a-7756-7346-4cde459ca674
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=0a43139f-ab33-6c13-5a93-51269bfe3d0e
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 0a43139f-ab33-6c13-5a93-51269bfe3d0e
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.EMC, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.EMC
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=2bbe42b8-e0b0-5037-0252-609268e17370
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.GOOG, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.GOOG
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 2bbe42b8-e0b0-5037-0252-609268e17370
+10:23:00 [MessageBrokerSockJS-1] ExecutorSubscribableChannel - [brokerChannel] sending message id=31a0fdb6-e272-1640-a795-4c4071e0f635
+10:23:00 [MessageBrokerSockJS-1] ChannelInterceptorChain - postSend (sent=true) message id 31a0fdb6-e272-1640-a795-4c4071e0f635
+10:23:00 [brokerChannel-1] DefaultUserDestinationResolver - Ignoring message to /topic/price.stock.DELL, not a &quot;user&quot; destination
+10:23:00 [brokerChannel-1] DefaultSubscriptionRegistry - Found 0 subscriptions for destination=/topic/price.stock.DELL
+10:23:00 [main] StandardWebSocketClient - Connecting to ws://localhost:31001/portfolio/websocket
+10:23:00 [WebSocketClient-1] StandardWebSocketClient - Handshake request headers: {Sec-WebSocket-Version=[13], Cookie=[JSESSIONID=22DC40086F57A9A024A5F530BD43CFC2; Path=/; HttpOnly], Upgrade=[websocket], Host=[localhost:31001], Sec-WebSocket-Key=[NfTQRQbRtz6t+8OOuShG3Q==], Connection=[upgrade]}
+</system-out>
+  </testcase>
+  <testcase time="0.01" classname="org.springframework.samples.portfolio.web.tomcat.IntegrationPortfolioTests" name="executeTrade">
+    <error message="java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket" type="java.lang.IllegalStateException">java.lang.IllegalStateException: java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at org.springframework.samples.portfolio.web.tomcat.TestStompClient.connect(TestStompClient.java:109)
+	at org.springframework.samples.portfolio.web.tomcat.IntegrationPortfolioTests.executeTrade(IntegrationPortfolioTests.java:167)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:134)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:103)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+Caused by: java.util.concurrent.ExecutionException: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at java.util.concurrent.FutureTask.report(Unknown Source)
+	at java.util.concurrent.FutureTask.get(Unknown Source)
+	at org.springframework.samples.portfolio.web.tomcat.TestStompClient.connect(TestStompClient.java:106)
+	... 32 more
+Caused by: javax.websocket.DeploymentException: The HTTP response from the server [HTTP/1.1 302 Found
+] did not permit the HTTP upgrade to WebSocket
+	at org.apache.tomcat.websocket.WsWebSocketContainer.parseStatus(WsWebSocketContainer.java:610)
+	at org.apache.tomcat.websocket.WsWebSocketContainer.processResponse(WsWebSocketContainer.java:594)
+	at org.apache.tomcat.websocket.WsWebSocketContainer.connectToServer(WsWebSocketContainer.java:332)
+	at org.springframework.web.socket.client.standard.StandardWebSocketClient$1.call(StandardWebSocketClient.java:122)
+	at org.springframework.web.socket.client.standard.StandardWebSocketClient$1.call(StandardWebSocketClient.java:119)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</error>
+    <system-out>10:23:00 [main] StandardWebSocketClient - Connecting to ws://localhost:31001/portfolio/websocket
+10:23:00 [WebSocketClient-1] StandardWebSocketClient - Handshake request headers: {Sec-WebSocket-Version=[13], Cookie=[JSESSIONID=22DC40086F57A9A024A5F530BD43CFC2; Path=/; HttpOnly], Upgrade=[websocket], Host=[localhost:31001], Sec-WebSocket-Key=[HRgebdOu948WRbQWT5CZ8g==], Connection=[upgrade]}
+</system-out>
+  </testcase>
+</testsuite>

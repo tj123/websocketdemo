@@ -67,7 +67,12 @@ public class TradeServiceImpl implements TradeService {
 				portfolio.buy(ticker, sharesToTrade) : portfolio.sell(ticker, sharesToTrade);
 
 		if (newPosition == null) {
-			String payload = "Rejected trade " + trade;
+			String payload = "";
+			if (trade.getAction() == TradeAction.Buy) {
+				payload = "交易失败：您没能购入 " + trade.getShares() + "份" + trade.getTicker() + "，可能是您的余额不足。";
+			} else {
+				payload = "交易失败：您没能卖出 " + trade.getShares() + "份" + trade.getTicker() + "，可能是你没有那么多的股票。";
+			}
 			this.messagingTemplate.convertAndSendToUser(username, "/queue/errors", payload);
 			return;
 		}
@@ -107,23 +112,12 @@ public class TradeServiceImpl implements TradeService {
 		 */
 		private final PortfolioPosition position;
 		/**
-		 * 余额
-		 */
-		private final double funds;
-		/**
 		 * 时间戳
 		 */
 		private final long timestamp;
 
-		public TradeResult(String user, double funds, PortfolioPosition position) {
-			this.user = user;
-			this.funds = funds;
-			this.position = position;
-			this.timestamp = System.currentTimeMillis();
-		}
 		public TradeResult(String user, PortfolioPosition position) {
 			this.user = user;
-			this.funds = 0;
 			this.position = position;
 			this.timestamp = System.currentTimeMillis();
 		}

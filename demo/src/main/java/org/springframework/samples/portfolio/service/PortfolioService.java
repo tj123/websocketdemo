@@ -32,6 +32,10 @@ public interface PortfolioService {
 	 */
 	Portfolio findPortfolio(String username);
 	/**
+	 * 修改某人的资产
+	 */
+	void setPortfolio(String username, Portfolio portfolio);
+	/**
 	 * 获取账户余额
 	 */
 	Double getfunds(String username);
