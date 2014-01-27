@@ -8,8 +8,9 @@ function ApplicationModel(stompClient) {
   self.notifications = ko.observableArray();
 
   self.connect = function() {
+	  
     stompClient.connect('', '', function(frame) {
-
+      // 绑定
       console.log('Connected ' + frame);
       self.username(frame.headers['user-name']);
 
@@ -75,6 +76,14 @@ function PortfolioModel() {
       result += self.rows()[i].value();
     }
     return result;
+  });
+  
+  self.shareIndex = ko.computed(function() {
+	  var result = 0;
+	  for ( var i = 0; i < self.rows().length; i++) {
+		  result += self.rows()[i].price();
+	  }
+	  return (result * 100 / self.rows().length).toFixed(0);
   });
   
   self.formattedTotalValue = ko.computed(function() {
