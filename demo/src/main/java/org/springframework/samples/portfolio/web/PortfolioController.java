@@ -25,9 +25,9 @@ import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
+import org.springframework.samples.portfolio.model.Portfolio;
 import org.springframework.samples.portfolio.service.PortfolioService;
 import org.springframework.samples.portfolio.service.TradeService;
-import org.springframework.samples.portfolio.vo.Portfolio;
 import org.springframework.samples.portfolio.vo.PortfolioPosition;
 import org.springframework.samples.portfolio.vo.Trade;
 import org.springframework.stereotype.Controller;
@@ -57,10 +57,10 @@ public class PortfolioController {
 	 * 获得仓位信息
 	 */
 	@SubscribeMapping("/positions")
-	public List<PortfolioPosition> getPositions(Principal principal) throws Exception {
+	public Portfolio getPositions(Principal principal) throws Exception {
 		logger.debug("Positions for " + principal.getName());
 		Portfolio portfolio = this.portfolioService.findPortfolio(principal.getName());
-		return portfolio.getPositions();
+		return portfolio;
 	}
 
 	/**

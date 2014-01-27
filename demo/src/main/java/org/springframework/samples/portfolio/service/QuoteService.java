@@ -63,7 +63,6 @@ public class QuoteService implements ApplicationListener<BrokerAvailabilityEvent
 				logger.trace("Sending quote " + quote);
 			}
 			if (this.brokerAvailable.get()) {
-				// TODO 看不懂
 				this.messagingTemplate.convertAndSend("/topic/price.stock." + quote.getTicker(), quote);
 			}
 		}

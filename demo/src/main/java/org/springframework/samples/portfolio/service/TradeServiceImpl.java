@@ -22,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.samples.portfolio.vo.Portfolio;
+import org.springframework.samples.portfolio.model.Portfolio;
 import org.springframework.samples.portfolio.vo.PortfolioPosition;
 import org.springframework.samples.portfolio.vo.Trade;
 import org.springframework.samples.portfolio.vo.Trade.TradeAction;
@@ -58,7 +58,8 @@ public class TradeServiceImpl implements TradeService {
 	 */
 	public void executeTrade(Trade trade) {
 
-		Portfolio portfolio = this.portfolioService.findPortfolio(trade.getUsername());
+		String username = trade.getUsername();
+		Portfolio portfolio = this.portfolioService.findPortfolio(username);
 		String ticker = trade.getTicker();
 		int sharesToTrade = trade.getShares();
 
@@ -67,11 +68,13 @@ public class TradeServiceImpl implements TradeService {
 
 		if (newPosition == null) {
 			String payload = "Rejected trade " + trade;
-			this.messagingTemplate.convertAndSendToUser(trade.getUsername(), "/queue/errors", payload);
+			this.messagingTemplate.convertAndSendToUser(username, "/queue/errors", payload);
 			return;
 		}
 
-		this.tradeResults.add(new TradeResult(trade.getUsername(), newPosition));
+		Double funds = this.portfolioService.getfunds(username);
+		this.messagingTemplate.convertAndSendToUser(username, "/queue/funds-updates", funds);
+		this.tradeResults.add(new TradeResult(username, newPosition));
 	}
 
 	/**
@@ -104,12 +107,23 @@ public class TradeServiceImpl implements TradeService {
 		 */
 		private final PortfolioPosition position;
 		/**
+		 * 余额
+		 */
+		private final double funds;
+		/**
 		 * 时间戳
 		 */
 		private final long timestamp;
 
+		public TradeResult(String user, double funds, PortfolioPosition position) {
+			this.user = user;
+			this.funds = funds;
+			this.position = position;
+			this.timestamp = System.currentTimeMillis();
+		}
 		public TradeResult(String user, PortfolioPosition position) {
 			this.user = user;
+			this.funds = 0;
 			this.position = position;
 			this.timestamp = System.currentTimeMillis();
 		}

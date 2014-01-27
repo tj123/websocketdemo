@@ -15,7 +15,8 @@
  */
 package org.springframework.samples.portfolio.service;
 
-import org.springframework.samples.portfolio.vo.Portfolio;
+import org.springframework.samples.portfolio.model.Portfolio;
+
 
 /**
  * 资产处理服务
@@ -30,5 +31,16 @@ public interface PortfolioService {
 	 * @return
 	 */
 	Portfolio findPortfolio(String username);
-
+	/**
+	 * 获取账户余额
+	 */
+	Double getfunds(String username);
+	/**
+	 * 设置账户余额
+	 */
+	void setfunds(String username, Double funds);
+	/**
+	 * 设置账户余额
+	 */
+	void incfunds(String username, Double margin);
 }

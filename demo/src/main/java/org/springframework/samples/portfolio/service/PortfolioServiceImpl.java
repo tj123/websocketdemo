@@ -16,7 +16,7 @@
 
 package org.springframework.samples.portfolio.service;
 
-import org.springframework.samples.portfolio.vo.Portfolio;
+import org.springframework.samples.portfolio.model.Portfolio;
 import org.springframework.samples.portfolio.vo.PortfolioPosition;
 import org.springframework.stereotype.Service;
 
@@ -29,41 +29,35 @@ import java.util.Map;
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
 
+	/**
+	 * 用户资产表 (模拟数据库)
+	 */
 	// user -> Portfolio
 	private final Map<String, Portfolio> portfolioLookup = new HashMap<>();
+	private final Map<String, Double> fundsLookup = new HashMap<>();
 
 	/**
-	 * 构造函数,初始化资产
+	 * 构造函数,初始化资产 (模拟数据库初始数据)
 	 */
 	public PortfolioServiceImpl() {
 
 		Portfolio portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 10));
-		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 10));
-		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 10));
+		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 0));
+		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 0));
+		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 0));
 		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 100));
+		portfolio.setfunds(9000D);
 		this.portfolioLookup.put("sybn", portfolio);
+		this.fundsLookup.put("sybn", 9000D);
 
 		portfolio = new Portfolio();
 		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 10));
 		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 10));
 		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 10));
 		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 100));
+		portfolio.setfunds(9000D);
 		this.portfolioLookup.put("admin", portfolio);
-
-		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("Citrix Systems, Inc.", "CTXS", 75));
-		portfolio.addPosition(new PortfolioPosition("Dell Inc.", "DELL", 50));
-		portfolio.addPosition(new PortfolioPosition("Microsoft", "MSFT", 33));
-		portfolio.addPosition(new PortfolioPosition("Oracle", "ORCL", 45));
-		this.portfolioLookup.put("fabrice", portfolio);
-
-		portfolio = new Portfolio();
-		portfolio.addPosition(new PortfolioPosition("EMC Corporation", "EMC", 75));
-		portfolio.addPosition(new PortfolioPosition("Google Inc", "GOOG", 5));
-		portfolio.addPosition(new PortfolioPosition("VMware, Inc.", "VMW", 23));
-		portfolio.addPosition(new PortfolioPosition("Red Hat", "RHT", 15));
-		this.portfolioLookup.put("paulson", portfolio);
+		this.fundsLookup.put("sybn", 9000D);
 	}
 
 	/**
@@ -75,6 +69,35 @@ public class PortfolioServiceImpl implements PortfolioService {
 			throw new IllegalArgumentException(username);
 		}
 		return portfolio;
+	}
+	
+	/**
+	 * 获取账户余额
+	 */
+	public Double getfunds(String username) {
+		Double funds = fundsLookup.get(username);
+		if (fundsLookup == null) {
+			throw new IllegalArgumentException(username);
+		}
+		return funds;
+	}
+	/**
+	 * 设置账户余额
+	 */
+	public void setfunds(String username, Double funds) {
+		fundsLookup.put(username, funds);
+		return;
+	}
+	/**
+	 * 设置账户余额
+	 */
+	public void incfunds(String username, Double margin) {
+		Double funds = fundsLookup.get(username);
+		if (fundsLookup == null) {
+			throw new IllegalArgumentException(username);
+		}
+		fundsLookup.put(username, funds + margin);
+		return;
 	}
 
 }

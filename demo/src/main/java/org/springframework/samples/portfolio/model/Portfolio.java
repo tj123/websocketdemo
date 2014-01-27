@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.portfolio.vo;
+package org.springframework.samples.portfolio.model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.portfolio.service.PortfolioService;
+import org.springframework.samples.portfolio.service.StockQuoteGenerator;
+import org.springframework.samples.portfolio.vo.PortfolioPosition;
 
 
 /**
@@ -27,11 +32,12 @@ import java.util.Map;
  *
  */
 public class Portfolio {
-	
+	@Autowired PortfolioService portfolioService;
 	/**
 	 * 资产组合
 	 */
 	private final Map<String,PortfolioPosition> positionLookup = new LinkedHashMap<String,PortfolioPosition>();
+	private Double funds = 0D;
 
 	/**
 	 * 获取资产
@@ -67,8 +73,10 @@ public class Portfolio {
 		if ((position == null) || (sharesToBuy < 1)) {
 			return null;
 		}
-		position = new PortfolioPosition(position, sharesToBuy);
+		double price = StockQuoteGenerator.getPrice(ticker).doubleValue();
+		position = new PortfolioPosition(position, price, sharesToBuy);
 		this.positionLookup.put(ticker, position);
+		incfunds(- price * sharesToBuy);
 		return position;
 	}
 
@@ -81,9 +89,30 @@ public class Portfolio {
 		if ((position == null) || (sharesToSell < 1) || (position.getShares() < sharesToSell)) {
 			return null;
 		}
-		position = new PortfolioPosition(position, -sharesToSell);
+		double price = StockQuoteGenerator.getPrice(ticker).doubleValue();
+		position = new PortfolioPosition(position, price, -sharesToSell);
 		this.positionLookup.put(ticker, position);
+		incfunds(price * sharesToSell);
 		return position;
+	}
+
+	/**
+	 * 获取账户余额
+	 */
+	public Double getfunds() {
+		return funds;
+	}
+	/**
+	 * 设置账户余额
+	 */
+	public void setfunds(Double funds) {
+		this.funds = funds;
+	}
+	/**
+	 * 设置账户余额
+	 */
+	public void incfunds(Double margin) {
+		this.funds = funds + margin;
 	}
 
 }

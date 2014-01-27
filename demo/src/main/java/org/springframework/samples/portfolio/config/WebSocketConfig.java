@@ -45,5 +45,6 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 //		registry.enableStompBrokerRelay("/queue/", "/topic/");
 		registry.setApplicationDestinationPrefixes("/app");
 	}
+	
 
 }

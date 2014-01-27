@@ -74,12 +74,11 @@ public class PortfolioPosition {
 	 * @param other
 	 * @param sharesToAddOrSubtract
 	 */
-	public PortfolioPosition(PortfolioPosition other, int sharesToAddOrSubtract) {
+	public PortfolioPosition(PortfolioPosition other, double price, int sharesToAddOrSubtract) {
 		this.company = other.company;
 		this.ticker = other.ticker;
 		this.price = StockQuoteGenerator.getPrice(other.ticker).doubleValue();
 		this.shares = other.shares + sharesToAddOrSubtract;
-		double price = StockQuoteGenerator.getPrice(other.ticker).doubleValue();
 		this.capital = other.capital + price * sharesToAddOrSubtract;
 		this.updateTime = System.currentTimeMillis();
 	}

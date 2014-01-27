@@ -59,8 +59,8 @@
               <td colspan="6">Total</td>
               <td data-bind="text: portfolio().totalShares" class="number"></td>
               <td data-bind="text: portfolio().totalValue" class="number"></td>
-              <td data-bind="text: portfolio().totalProfit" class="number"></td>
-              <td></td>
+              <td data-bind="text: portfolio().totalProfit, style: {color: portfolio().funds() < 0 ? 'green' : 'red'}" class="number"></td>
+              <td data-bind="text: portfolio().fundsValue" class="number"></td>
             </tr>
           </tfoot>
           <tbody></tbody>

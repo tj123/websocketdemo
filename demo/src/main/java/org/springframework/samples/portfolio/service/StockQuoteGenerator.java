@@ -18,11 +18,6 @@ import org.springframework.samples.portfolio.vo.Quote;
 public class StockQuoteGenerator {
 
 	/**
-	 * 两位小数
-	 */
-	private static final MathContext mathContext = new MathContext(2);
-
-	/**
 	 * 随机数
 	 */
 	private static Random random = new Random();
@@ -85,6 +80,7 @@ public class StockQuoteGenerator {
 			initPrices();
 		}
 		String string = prices.get(ticker);
+		// 为了保证精度建议使用字符串存储并构造BigDecimal
 		BigDecimal seedPrice = new BigDecimal(string).setScale(2, BigDecimal.ROUND_DOWN);
 		return seedPrice;
 	}

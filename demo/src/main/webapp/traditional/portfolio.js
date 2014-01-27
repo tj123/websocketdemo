@@ -23,6 +23,9 @@ function ApplicationModel(stompClient) {
         self.pushNotification("Position update " + message.body);
         self.portfolio().updatePosition(JSON.parse(message.body));
       });
+      stompClient.subscribe("/user/queue/funds-updates", function(message) {
+          self.portfolio().updateFunds(JSON.parse(message.body));
+      });
       stompClient.subscribe("/user/queue/errors", function(message) {
         self.pushNotification("Error " + message.body);
       });
@@ -48,6 +51,7 @@ function PortfolioModel() {
   var self = this;
 
   self.rows = ko.observableArray();
+  self.funds = ko.observable(0);
 
   self.totalShares = ko.computed(function() {
     var result = 0;
@@ -65,6 +69,10 @@ function PortfolioModel() {
     return "$" + result.toFixed(2);
   });
   
+  self.fundsValue = ko.computed(function() {
+    return "$" + self.funds();
+  });
+  
   self.totalProfit = ko.computed(function() {
 	var result = 0;
 	for ( var i = 0; i < self.rows().length; i++) {
@@ -75,12 +83,14 @@ function PortfolioModel() {
 
   var rowLookup = {};
 
-  self.loadPositions = function(positions) {
-    for ( var i = 0; i < positions.length; i++) {
+  self.loadPositions = function(position) {
+	positions = position.positions
+    for ( var i = 0; i < position.positions.length; i++) {
       var row = new PortfolioRow(positions[i]);
       self.rows.push(row);
       rowLookup[row.ticker] = row;
     }
+    self.funds(position.funds);
   };
 
   self.processQuote = function(quote) {
@@ -94,6 +104,10 @@ function PortfolioModel() {
 	pos.shares(position.shares);
 	pos.capital(position.capital);
 	pos.average(pos.shares() == 0 ? 0 :(pos.capital() / pos.shares()).toFixed(2));
+  };
+  
+  self.updateFunds = function(funds) {
+	  self.funds(funds);
   };
 };
 
