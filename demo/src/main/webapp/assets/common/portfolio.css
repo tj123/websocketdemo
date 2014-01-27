@@ -17,10 +17,11 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
 
-.table th.number, .table td.number {
+.table th.number,
+.table td.number {
   text-align: right;
 }
-
+.table th.trade-buttons,
 .table td.trade-buttons {
   text-align: center;
 }

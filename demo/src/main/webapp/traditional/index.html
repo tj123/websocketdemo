@@ -33,8 +33,8 @@
               <th class="number">市值</th>
               <th class="number">持仓均价</th>
               <th>盈亏</th>
-              <th>操作</th>
-              <th>快捷操作</th>
+              <th width="100" class="trade-buttons">操作</th>
+              <th width="100" class="trade-buttons">快捷操作</th>
             </tr>
           </thead>
           <tbody data-bind="foreach: portfolio().rows">
@@ -71,9 +71,9 @@
               <td data-bind="text: portfolio().formattedTotalValue" class="number"></td>
               <td></td>
               <td data-bind="style: {color: portfolio().totalProfit() < 0 ? 'green' : 'red'}">
-              	$<span data-bind="text: portfolio().totalProfit"></span>
+              	<span data-bind="text: portfolio().formattedTotalProfit"></span>
               </td>
-              <td>
+              <td colspan="2">
               	总资产:
               	<span data-bind="style: {color: portfolio().assets() < 0 ? 'green' : 'red'}">
               	  <span data-bind="text: portfolio().formattedAssets"></span>
@@ -116,7 +116,7 @@
             </div>
             <button class="btn" data-dismiss="modal">关闭</button>
             <button class="btn btn-primary" type="submit">
-              <span data-bind="text: trade().action"></span>
+              <span data-bind="text: trade().actionName"></span>
             </button>
           </form>
         </div>
