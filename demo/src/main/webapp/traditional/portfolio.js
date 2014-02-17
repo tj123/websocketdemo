@@ -83,7 +83,7 @@ function PortfolioModel() {
 	  for ( var i = 0; i < self.rows().length; i++) {
 		  result += self.rows()[i].price();
 	  }
-	  return (result * 100 / self.rows().length).toFixed(0);
+	  return (result * 1000 / self.rows().length).toFixed(0);
   });
   
   self.formattedTotalValue = ko.computed(function() {

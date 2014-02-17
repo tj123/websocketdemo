@@ -15,6 +15,8 @@
  */
 package org.springframework.samples.portfolio.service;
 
+import java.math.BigDecimal;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
@@ -66,6 +68,7 @@ public class QuoteService implements ApplicationListener<BrokerAvailabilityEvent
 				this.messagingTemplate.convertAndSend("/topic/price.stock." + quote.getTicker(), quote);
 			}
 		}
+		logger.error("Sending quote end");
 	}
 
 }
