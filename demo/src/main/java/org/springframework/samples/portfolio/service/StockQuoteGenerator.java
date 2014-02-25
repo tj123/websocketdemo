@@ -63,8 +63,13 @@ public class StockQuoteGenerator {
 	 */
 	private static BigDecimal getNewPrice(String ticker) {
 		BigDecimal seedPrice = getPrice(ticker);
-		double rangeLimit = seedPrice.doubleValue() * 0.10;
+		double doubleValue = seedPrice.doubleValue();
+		double rangeLimit = doubleValue * 0.10;
 		double range = (random.nextDouble() - random.nextDouble()) * random.nextDouble();
+		if (doubleValue < 0.1) {
+			// 如果故价过低，则强制提高一次股价，防止股价清零。相当于上市公司重组
+			range = range + random.nextDouble() * random.nextDouble() * random.nextDouble() * 10;
+		}
 		BigDecimal priceChange = new BigDecimal(String.valueOf(range * rangeLimit));
 		// 补偿因1.1*0.9=0.99 造成的股价下跌趋势，将下跌行为的0.9修正为0.909，故重置10%的跌幅为0
 		if (range <0 && random.nextDouble() >= 0.9) {
